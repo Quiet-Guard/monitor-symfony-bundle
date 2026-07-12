@@ -18,7 +18,8 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('key')->defaultNull()->end()
             ->integerNode('timeout')->defaultValue(3)->end()
             ->scalarNode('release')->defaultNull()->end()
-            ->integerNode('trace_limit')->defaultValue(50)->end()
+            // 0 = unlimited: the full trace ships by default, like the sibling SDKs.
+            ->integerNode('trace_limit')->defaultValue(0)->end()
             ->arrayNode('environments')
             ->scalarPrototype()->end()
             ->defaultValue([])
