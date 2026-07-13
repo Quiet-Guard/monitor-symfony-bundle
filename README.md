@@ -1,33 +1,43 @@
 # LaravelMonitor: Symfony bundle
 
-Report exceptions, application logs and dependency snapshots from a Symfony
-application to your
+Report exceptions and application logs from a Symfony application to your
 [LaravelMonitor](https://github.com/La-boite-a-code/LaravelMonitor) server.
-Built on the framework-agnostic core `laboiteacode/monitor-php`.
+Built on the framework-agnostic core `laboiteacode/monitor-php`, the same
+engine that powers the Laravel SDK and the WordPress plugin. Dependency
+snapshots can be sent through the platform-neutral API (see below).
 
 ## Requirements
 
-- PHP 8.2+
-- Symfony 6.4 or 7.x (`config`, `dependency-injection`, `event-dispatcher`, `http-kernel`)
+- PHP 8.2+ with `ext-curl` and `ext-sodium` (required by the core)
+- Symfony 6.4, 7.x or 8.x (`config`, `dependency-injection`, `event-dispatcher`, `http-kernel`)
 - `monolog/monolog` 3.x (optional, only for log forwarding)
 
 ## Installation
 
-In the **application you want to monitor**:
+The package is not published on Packagist yet. Once it is, installing will be a
+plain `composer require laboiteacode/monitor-symfony-bundle`.
+
+Until then, install it from a clone of the monorepo using path repositories.
+Clone the repository next to the **application you want to monitor**:
 
 ```bash
-composer require laboiteacode/monitor-symfony-bundle
+git clone https://github.com/La-boite-a-code/LaravelMonitor.git
 ```
 
-Until the package is published on Packagist, add a VCS repository to the
-application's `composer.json` first:
+Then declare the bundle and its core in the application's `composer.json` and
+require the bundle:
 
 ```json
 {
     "repositories": [
-        { "type": "vcs", "url": "https://github.com/La-boite-a-code/LaravelMonitor" }
+        { "type": "path", "url": "../LaravelMonitor/packages/monitor-symfony-bundle", "options": { "versions": { "laboiteacode/monitor-symfony-bundle": "0.1.0" } } },
+        { "type": "path", "url": "../LaravelMonitor/packages/monitor-php", "options": { "versions": { "laboiteacode/monitor-php": "0.1.0" } } }
     ]
 }
+```
+
+```bash
+composer require laboiteacode/monitor-symfony-bundle:^0.1
 ```
 
 Register the bundle (Symfony Flex usually does this automatically):
@@ -69,14 +79,22 @@ nothing at all.
   (exceptions, logs, dependencies) over a dependency-free curl transport.
 - `monitor.exception_subscriber`: listens on `kernel.exception` at low priority
   (-64) and reports unhandled throwables with the request method and URL.
-  Additive: it never alters the response or stops propagation.
-- `monitor.log_handler` (only when `logs.enabled` is true): a Monolog handler
-  that buffers records and ships them in batches, on `max_batch` or when the
-  handler closes. Records carrying an exception are skipped: those flow through
-  the exception pipeline instead.
+  Additive: it never alters the response or stops propagation. Expected HTTP
+  errors (`HttpExceptionInterface` with a status below 500, such as 404 bot
+  probes) are skipped so they never burn your event quota; 5xx HTTP exceptions
+  are reported.
+- `monitor.log_handler`: a Monolog handler that buffers records and ships them
+  in batches, on `max_batch` or when the handler closes. Records carrying an
+  exception are skipped: those flow through the exception pipeline instead.
+  The service is registered whenever the bundle is enabled, so a `monolog.yaml`
+  pointing at it keeps compiling when `logs.enabled` is toggled off; the
+  handler simply drops records in that case. The `environments` allowlist
+  applies to logs exactly like exceptions.
 
-Reporting is fail-safe by design: transport or configuration errors are
-swallowed and never break the host application.
+Reporting is fail-safe by design: transport errors are swallowed at runtime and
+never break the host application. Configuration mistakes (an unknown option, an
+invalid Monolog level) surface at container compile time or boot, on purpose:
+they are deploy-time errors, not production noise.
 
 ## Forwarding logs
 

@@ -1,6 +1,6 @@
 {
     "name": "laboiteacode/monitor-symfony-bundle",
-    "description": "Symfony bundle to report exceptions, logs and dependencies to a LaravelMonitor server.",
+    "description": "Symfony bundle to report exceptions and application logs to a LaravelMonitor server.",
     "type": "symfony-bundle",
     "license": "MIT",
     "keywords": [
@@ -24,13 +24,16 @@
     "require": {
         "php": "^8.2",
         "laboiteacode/monitor-php": "^0.1",
-        "symfony/config": "^6.4|^7.0",
-        "symfony/dependency-injection": "^6.4|^7.0",
-        "symfony/event-dispatcher": "^6.4|^7.0",
-        "symfony/http-kernel": "^6.4|^7.0"
+        "symfony/config": "^6.4|^7.0|^8.0",
+        "symfony/dependency-injection": "^6.4|^7.0|^8.0",
+        "symfony/event-dispatcher": "^6.4|^7.0|^8.0",
+        "symfony/http-kernel": "^6.4|^7.0|^8.0"
     },
     "require-dev": {
         "monolog/monolog": "^3.0"
+    },
+    "suggest": {
+        "monolog/monolog": "Required (^3.0) to forward application logs through the monitor.log_handler service."
     },
     "autoload": {
         "psr-4": {

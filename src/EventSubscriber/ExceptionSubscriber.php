@@ -6,6 +6,7 @@ use LaBoiteACode\Monitor\Config;
 use LaBoiteACode\Monitor\Reporter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -35,9 +36,17 @@ class ExceptionSubscriber implements EventSubscriberInterface
             return;
         }
 
+        $throwable = $event->getThrowable();
+
+        // Expected HTTP errors (404 bot probes, 403s...) are not defects and
+        // would burn the event quota; only 5xx HTTP exceptions are reported.
+        if ($throwable instanceof HttpExceptionInterface && $throwable->getStatusCode() < 500) {
+            return;
+        }
+
         $request = $event->getRequest();
 
-        $this->reporter->reportException($event->getThrowable(), [
+        $this->reporter->reportException($throwable, [
             'environment' => $this->environment,
             'request' => [
                 'method' => $request->getMethod(),

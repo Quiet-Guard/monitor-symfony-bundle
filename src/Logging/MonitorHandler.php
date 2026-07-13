@@ -2,6 +2,7 @@
 
 namespace LaBoiteACode\Monitor\Symfony\Logging;
 
+use LaBoiteACode\Monitor\Config;
 use LaBoiteACode\Monitor\Reporter;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Level;
@@ -11,6 +12,10 @@ use Monolog\LogRecord;
  * Monolog handler that buffers records and ships them to LaravelMonitor in
  * batches (on max-batch or on close). Records carrying an exception are skipped:
  * those flow through the exception pipeline instead.
+ *
+ * The handler service is always registered while the bundle is enabled, so a
+ * monolog.yaml still pointing at it never breaks container compilation; with
+ * logs disabled (or outside the allowed environments) it simply drops records.
  */
 class MonitorHandler extends AbstractProcessingHandler
 {
@@ -24,12 +29,23 @@ class MonitorHandler extends AbstractProcessingHandler
         private readonly int $maxBatch = 200,
         private readonly ?string $environment = null,
         private readonly ?string $release = null,
+        private readonly ?Config $config = null,
+        private readonly bool $enabled = true,
     ) {
         parent::__construct($level, $bubble);
     }
 
     protected function write(LogRecord $record): void
     {
+        if (! $this->enabled) {
+            return;
+        }
+
+        // The environments allowlist gates logs exactly like exceptions.
+        if ($this->config !== null && ! $this->config->reportsFrom($this->environment)) {
+            return;
+        }
+
         if (isset($record->context['exception'])) {
             return;
         }

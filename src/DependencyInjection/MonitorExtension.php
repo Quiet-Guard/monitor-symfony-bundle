@@ -60,17 +60,20 @@ class MonitorExtension extends Extension
         $subscriber->addTag('kernel.event_subscriber');
         $container->setDefinition('monitor.exception_subscriber', $subscriber);
 
-        if ($config['logs']['enabled'] ?? false) {
-            $handler = new Definition(MonitorHandler::class, [
-                new Reference('monitor.reporter'),
-                $config['logs']['level'],
-                true,
-                $config['logs']['max_batch'],
-                $env,
-                $config['release'],
-            ]);
-            $container->setDefinition('monitor.log_handler', $handler);
-        }
+        // Always registered while the bundle is enabled: a monolog.yaml handler
+        // pointing at this service must not break container compilation when
+        // logs.enabled is toggled off; the handler no-ops instead.
+        $handler = new Definition(MonitorHandler::class, [
+            new Reference('monitor.reporter'),
+            $config['logs']['level'],
+            true,
+            $config['logs']['max_batch'],
+            $env,
+            $config['release'],
+            new Reference('monitor.config'),
+            $config['logs']['enabled'] ?? false,
+        ]);
+        $container->setDefinition('monitor.log_handler', $handler);
     }
 
     public function getAlias(): string
