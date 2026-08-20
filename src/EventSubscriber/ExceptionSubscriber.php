@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Reports unhandled exceptions to LaravelMonitor. Additive: it never alters the
+ * Reports unhandled exceptions to Quiet Guard. Additive: it never alters the
  * response or stops propagation.
  */
 class ExceptionSubscriber implements EventSubscriberInterface

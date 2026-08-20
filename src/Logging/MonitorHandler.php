@@ -9,7 +9,7 @@ use Monolog\Level;
 use Monolog\LogRecord;
 
 /**
- * Monolog handler that buffers records and ships them to LaravelMonitor in
+ * Monolog handler that buffers records and ships them to Quiet Guard in
  * batches (on max-batch or on close). Records carrying an exception are skipped:
  * those flow through the exception pipeline instead.
  *

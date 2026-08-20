@@ -1,7 +1,7 @@
-# LaravelMonitor: Symfony bundle
+# Quiet Guard: Symfony bundle
 
 Report exceptions and application logs from a Symfony application to your
-[LaravelMonitor](https://github.com/La-boite-a-code/LaravelMonitor) server.
+[Quiet Guard](https://github.com/La-boite-a-code/Quiet Guard) server.
 Built on the framework-agnostic core `laboiteacode/monitor-php`, the same
 engine that powers the Laravel SDK and the WordPress plugin. Dependency
 snapshots can be sent through the platform-neutral API (see below).
@@ -21,7 +21,7 @@ Until then, install it from a clone of the monorepo using path repositories.
 Clone the repository next to the **application you want to monitor**:
 
 ```bash
-git clone https://github.com/La-boite-a-code/LaravelMonitor.git
+git clone https://github.com/La-boite-a-code/Quiet Guard.git
 ```
 
 Then declare the bundle and its core in the application's `composer.json` and
@@ -30,8 +30,8 @@ require the bundle:
 ```json
 {
     "repositories": [
-        { "type": "path", "url": "../LaravelMonitor/packages/monitor-symfony-bundle", "options": { "versions": { "laboiteacode/monitor-symfony-bundle": "0.1.0" } } },
-        { "type": "path", "url": "../LaravelMonitor/packages/monitor-php", "options": { "versions": { "laboiteacode/monitor-php": "0.1.0" } } }
+        { "type": "path", "url": "../Quiet Guard/packages/monitor-symfony-bundle", "options": { "versions": { "laboiteacode/monitor-symfony-bundle": "0.1.0" } } },
+        { "type": "path", "url": "../Quiet Guard/packages/monitor-php", "options": { "versions": { "laboiteacode/monitor-php": "0.1.0" } } }
     ]
 }
 ```
@@ -69,7 +69,7 @@ monitor:
         max_batch: 200          # flush the buffer past this many records
 ```
 
-`key` is the per-project API key generated in the LaravelMonitor dashboard
+`key` is the per-project API key generated in the Quiet Guard dashboard
 (shown only once at creation). With `enabled: false` the bundle registers
 nothing at all.
 
@@ -125,7 +125,7 @@ and call type.
 
 ## Documentation
 
-Full documentation is served by your LaravelMonitor server under `/docs`
+Full documentation is served by your Quiet Guard server under `/docs`
 (for example `https://monitor.example.com/docs`), including a dedicated
 section for this bundle.
 
