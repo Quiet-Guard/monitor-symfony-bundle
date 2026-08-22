@@ -17,21 +17,16 @@ snapshots can be sent through the platform-neutral API (see below).
 The package is not published on Packagist yet. Once it is, installing will be a
 plain `composer require laboiteacode/monitor-symfony-bundle`.
 
-Until then, install it from a clone of the monorepo using path repositories.
-Clone the repository next to the **application you want to monitor**:
+Until then, declare the public repositories in the application's `composer.json`
+and require it. Nothing to clone, nothing to keep in sync:
 
-```bash
-git clone https://github.com/La-boite-a-code/LaravelMonitor.git
-```
 
-Then declare the bundle and its core in the application's `composer.json` and
-require the bundle:
 
 ```json
 {
     "repositories": [
-        { "type": "path", "url": "../LaravelMonitor/packages/monitor-symfony-bundle", "options": { "versions": { "laboiteacode/monitor-symfony-bundle": "0.1.0" } } },
-        { "type": "path", "url": "../LaravelMonitor/packages/monitor-php", "options": { "versions": { "laboiteacode/monitor-php": "0.1.0" } } }
+        { "type": "vcs", "url": "https://github.com/Quiet-Guard/monitor-symfony-bundle" },
+        { "type": "vcs", "url": "https://github.com/Quiet-Guard/monitor-php" }
     ]
 }
 ```
