@@ -1,7 +1,7 @@
 # Quiet Guard: Symfony bundle
 
 Report exceptions and application logs from a Symfony application to your
-[Quiet Guard](https://github.com/Quiet-Guard/monitor-symfony-bundle) server.
+Quiet Guard server.
 Built on the framework-agnostic core `laboiteacode/monitor-php`, the same
 engine that powers the Laravel SDK and the WordPress plugin. Dependency
 snapshots can be sent through the platform-neutral API (see below).
@@ -35,7 +35,9 @@ and require it. Nothing to clone, nothing to keep in sync:
 composer require laboiteacode/monitor-symfony-bundle:^0.1
 ```
 
-Register the bundle (Symfony Flex usually does this automatically):
+Register the bundle by hand. Symfony Flex applies a recipe published in its
+own index against a Packagist package, and this package is on neither yet, so
+nothing registers it for you:
 
 ```php
 // config/bundles.php
