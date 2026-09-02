@@ -1,8 +1,8 @@
 <?php
 
-namespace LaBoiteACode\Monitor\Symfony;
+namespace QuietGuard\Monitor\Symfony;
 
-use LaBoiteACode\Monitor\Symfony\DependencyInjection\MonitorExtension;
+use QuietGuard\Monitor\Symfony\DependencyInjection\MonitorExtension;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

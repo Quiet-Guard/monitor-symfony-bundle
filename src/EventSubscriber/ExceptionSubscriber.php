@@ -1,9 +1,9 @@
 <?php
 
-namespace LaBoiteACode\Monitor\Symfony\EventSubscriber;
+namespace QuietGuard\Monitor\Symfony\EventSubscriber;
 
-use LaBoiteACode\Monitor\Config;
-use LaBoiteACode\Monitor\Reporter;
+use QuietGuard\Monitor\Config;
+use QuietGuard\Monitor\Reporter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;

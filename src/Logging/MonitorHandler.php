@@ -1,12 +1,12 @@
 <?php
 
-namespace LaBoiteACode\Monitor\Symfony\Logging;
+namespace QuietGuard\Monitor\Symfony\Logging;
 
-use LaBoiteACode\Monitor\Config;
-use LaBoiteACode\Monitor\Reporter;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Level;
 use Monolog\LogRecord;
+use QuietGuard\Monitor\Config;
+use QuietGuard\Monitor\Reporter;
 
 /**
  * Monolog handler that buffers records and ships them to Quiet Guard in

@@ -25,7 +25,7 @@ index, and no recipe exists for this bundle, so nothing registers it for you:
 // config/bundles.php
 return [
     // ...
-    LaBoiteACode\Monitor\Symfony\MonitorBundle::class => ['all' => true],
+    QuietGuard\Monitor\Symfony\MonitorBundle::class => ['all' => true],
 ];
 ```
 
@@ -54,7 +54,7 @@ nothing at all.
 
 ## What it wires
 
-- `monitor.reporter`: the shared `LaBoiteACode\Monitor\Reporter` service
+- `monitor.reporter`: the shared `QuietGuard\Monitor\Reporter` service
   (exceptions, logs, dependencies) over a dependency-free curl transport.
 - `monitor.exception_subscriber`: listens on `kernel.exception` at low priority
   (-64) and reports unhandled throwables with the request method and URL.

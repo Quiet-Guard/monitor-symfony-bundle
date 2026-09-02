@@ -1,14 +1,14 @@
 <?php
 
-namespace LaBoiteACode\Monitor\Symfony\DependencyInjection;
+namespace QuietGuard\Monitor\Symfony\DependencyInjection;
 
-use LaBoiteACode\Monitor\Config;
-use LaBoiteACode\Monitor\Http\CurlHttpClient;
-use LaBoiteACode\Monitor\Payload\ExceptionPayloadBuilder;
-use LaBoiteACode\Monitor\Reporter;
-use LaBoiteACode\Monitor\Support\Scrubber;
-use LaBoiteACode\Monitor\Symfony\EventSubscriber\ExceptionSubscriber;
-use LaBoiteACode\Monitor\Symfony\Logging\MonitorHandler;
+use QuietGuard\Monitor\Config;
+use QuietGuard\Monitor\Http\CurlHttpClient;
+use QuietGuard\Monitor\Payload\ExceptionPayloadBuilder;
+use QuietGuard\Monitor\Reporter;
+use QuietGuard\Monitor\Support\Scrubber;
+use QuietGuard\Monitor\Symfony\EventSubscriber\ExceptionSubscriber;
+use QuietGuard\Monitor\Symfony\Logging\MonitorHandler;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
