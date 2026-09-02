@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->arrayNode('scrub')
             ->scalarPrototype()->end()
-            ->defaultValue(['password', 'passphrase', 'token', 'secret', 'authorization', 'cookie', 'api_key'])
+            ->defaultValue(['password', 'passphrase', 'token', 'secret', 'authorization', 'cookie', 'referer', 'referrer', 'api_key'])
             ->end()
             ->arrayNode('logs')
             ->addDefaultsIfNotSet()

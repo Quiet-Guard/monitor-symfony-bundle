@@ -41,7 +41,7 @@ monitor:
     release: '%env(default::MONITOR_RELEASE)%'   # e.g. a git SHA
     trace_limit: 0              # 0 = full trace (default); a positive value trims
     environments: ['prod']      # empty = report from all environments
-    scrub: ['password', 'passphrase', 'token', 'secret', 'authorization', 'cookie', 'api_key']
+    scrub: ['password', 'passphrase', 'token', 'secret', 'authorization', 'cookie', 'referer', 'referrer', 'api_key']
     logs:
         enabled: false          # opt-in log forwarding
         level: warning          # minimum Monolog level to forward
