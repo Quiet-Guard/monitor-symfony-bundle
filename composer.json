@@ -1,5 +1,5 @@
 {
-    "name": "laboiteacode/monitor-symfony-bundle",
+    "name": "quiet-guard/monitor-symfony-bundle",
     "description": "Symfony bundle to report exceptions and application logs to a Quiet Guard server.",
     "type": "symfony-bundle",
     "license": "MIT",
@@ -24,7 +24,7 @@
     },
     "require": {
         "php": "^8.2",
-        "laboiteacode/monitor-php": "^0.1",
+        "quiet-guard/monitor-php": "^0.2",
         "symfony/config": "^6.4|^7.0|^8.0",
         "symfony/dependency-injection": "^6.4|^7.0|^8.0",
         "symfony/event-dispatcher": "^6.4|^7.0|^8.0",
@@ -41,12 +41,6 @@
             "LaBoiteACode\\Monitor\\Symfony\\": "src/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Quiet-Guard/monitor-php"
-        }
-    ],
     "minimum-stability": "stable",
     "prefer-stable": true
 }
