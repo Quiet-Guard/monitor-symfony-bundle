@@ -10,6 +10,7 @@ use QuietGuard\Monitor\Support\Scrubber;
 use QuietGuard\Monitor\Symfony\EventSubscriber\ExceptionSubscriber;
 use QuietGuard\Monitor\Symfony\Logging\MonitorHandler;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Reference;
@@ -45,11 +46,17 @@ class MonitorExtension extends Extension
             $config['release'],
         ]));
 
+        // Le logger, cinquième argument, qui n'était pas passé : c'est la SEULE
+        // chose qui émette un diagnostic dans ce client. Sans lui, une clé
+        // fausse ou une URL fausse ne produisent rien du tout, nulle part, et
+        // le client n'a pas de console où l'apprendre. Ignoré s'il n'existe
+        // pas, pour ne pas exiger monolog d'une application qui s'en passe.
         $container->setDefinition('monitor.reporter', new Definition(Reporter::class, [
             new Reference('monitor.config'),
             new Reference('monitor.http_client'),
             new Reference('monitor.scrubber'),
             new Reference('monitor.payload_builder'),
+            new Reference('logger', ContainerInterface::IGNORE_ON_INVALID_REFERENCE),
         ]));
 
         $subscriber = new Definition(ExceptionSubscriber::class, [
