@@ -60,7 +60,11 @@ class MonitorHandler extends AbstractProcessingHandler
             'logged_at' => $record->datetime->format(DATE_ATOM),
         ];
 
-        if (count($this->buffer) >= $this->maxBatch) {
+        // Ramené à la limite du serveur, qui refuse un lot de plus de 500 : une
+        // valeur au-dessus était acceptée par la configuration et refusée à
+        // chaque envoi, donc rien ne partait jamais et rien ne le disait. Un
+        // plancher de 1 parce que 0 ou négatif ne vide jamais.
+        if (count($this->buffer) >= min(500, max(1, $this->maxBatch))) {
             $this->flush();
         }
     }

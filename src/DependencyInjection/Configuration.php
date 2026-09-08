@@ -55,12 +55,13 @@ class Configuration implements ConfigurationInterface
             ->children()
             ->booleanNode('enabled')->defaultFalse()->end()
             ->scalarNode('level')->defaultValue('warning')->end()
-            // Plafonné à 500, la limite du serveur : une valeur au-dessus était
-            // acceptée ici et refusée à chaque envoi, donc rien ne partait
-            // jamais. Refusée à la compilation plutôt que silencieusement
-            // ramenée, parce qu'en Symfony la configuration est validée une
-            // fois et qu'un message de compilation se lit.
-            ->integerNode('max_batch')->min(1)->max(500)->defaultValue(200)->end()
+            // Ramené à l'exécution, pas refusé à la compilation. Une borne au
+            // niveau de l'arbre empêcherait de démarrer une application qui
+            // démarre aujourd'hui, ce qui n'est pas ce qu'un correctif de patch
+            // doit faire, et casserait aussi 0, qui valait « vider à chaque
+            // enregistrement ». Voir MonitorHandler, qui applique la borne du
+            // serveur comme le SDK Laravel.
+            ->integerNode('max_batch')->defaultValue(200)->end()
             ->end()
             ->end()
             ->end();

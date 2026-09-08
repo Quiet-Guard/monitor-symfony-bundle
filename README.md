@@ -45,7 +45,10 @@ monitor:
     logs:
         enabled: false          # opt-in log forwarding
         level: warning          # minimum Monolog level to forward
-        max_batch: 200          # flush the buffer past this many records
+        max_batch: 200          # flush past this many records, held to the server's 500
+    redact: [email, iban, nir, card, phone]   # value shapes masked before sending; [] disables
+    redact_custom:
+        order: '/ORD-\d+/'                    # label => pattern, masked as [redacted:order]
 ```
 
 `key` is the per-project API key generated in the Quiet Guard dashboard
@@ -71,9 +74,9 @@ tree; an empty `redact` list turns it off.
 - `monitor.log_handler`: a Monolog handler that buffers records and ships them
   in batches, on `max_batch` or when the handler closes. Records carrying an
   exception are skipped: those flow through the exception pipeline instead.
-  The service is registered whenever the bundle is enabled, so a `monolog.yaml`
-  pointing at it keeps compiling when `logs.enabled` is toggled off; the
-  handler simply drops records in that case. The `environments` allowlist
+  The service is always registered, whatever `enabled` and `logs.enabled` say,
+  so a `monolog.yaml` pointing at it keeps compiling in every environment; the
+  handler simply drops records when logging is off. The `environments` allowlist
   applies to logs exactly like exceptions.
 
 Reporting is fail-safe by design: transport errors are swallowed at runtime and
