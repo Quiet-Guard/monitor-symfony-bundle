@@ -24,9 +24,17 @@ class MonitorExtension extends Extension
     {
         $config = $this->processConfiguration(new Configuration, $configs);
 
-        if (! ($config['enabled'] ?? true)) {
-            return;
-        }
+        // Les services sont TOUJOURS définis, et « enabled » agit à l'exécution.
+        //
+        // Un retour anticipé ici ne définissait aucun service, alors que le
+        // README enseigne dans le même document un handler monolog pointant sur
+        // monitor.log_handler ET la possibilité de mettre enabled: false. Écrire
+        // config/packages/dev/monitor.yaml avec enabled: false, la chose
+        // évidente à faire, cassait donc la compilation du conteneur avec « You
+        // have requested a non-existent service monitor.log_handler ». Le
+        // commentaire du handler montre que ce mode d'échec avait déjà été
+        // raisonné un niveau plus bas.
+        $enabled = (bool) ($config['enabled'] ?? true);
 
         $env = '%kernel.environment%';
 
@@ -37,6 +45,8 @@ class MonitorExtension extends Extension
             $config['release'],
             $config['environments'],
             $config['trace_limit'],
+            $config['redact'],
+            $config['redact_custom'],
         ]));
 
         $container->setDefinition('monitor.http_client', new Definition(CurlHttpClient::class));
@@ -63,6 +73,7 @@ class MonitorExtension extends Extension
             new Reference('monitor.reporter'),
             new Reference('monitor.config'),
             $env,
+            $enabled,
         ]);
         $subscriber->addTag('kernel.event_subscriber');
         $container->setDefinition('monitor.exception_subscriber', $subscriber);

@@ -19,6 +19,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
         private readonly Reporter $reporter,
         private readonly Config $config,
         private readonly ?string $environment = null,
+        private readonly bool $enabled = true,
     ) {}
 
     /**
@@ -32,7 +33,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
     public function onException(ExceptionEvent $event): void
     {
-        if (! $this->config->reportsFrom($this->environment)) {
+        if (! $this->enabled || ! $this->config->reportsFrom($this->environment)) {
             return;
         }
 
