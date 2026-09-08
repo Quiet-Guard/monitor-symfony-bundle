@@ -49,8 +49,14 @@ monitor:
 ```
 
 `key` is the per-project API key generated in the Quiet Guard dashboard
-(shown only once at creation). With `enabled: false` the bundle registers
-nothing at all.
+(shown only once at creation). The services are always defined and
+`enabled: false` acts at runtime, so a per-environment override such as
+`config/packages/dev/monitor.yaml` compiles even when a `monolog.yaml`
+references `monitor.log_handler`.
+
+Value masking by shape (`email`, `iban`, `nir`, `card`, `phone`) is on by
+default and is configured by the `redact` and `redact_custom` keys of the same
+tree; an empty `redact` list turns it off.
 
 ## What it wires
 
