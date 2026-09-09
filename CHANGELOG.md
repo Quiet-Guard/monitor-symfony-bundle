@@ -2,6 +2,15 @@
 
 All notable changes to `quiet-guard/monitor-symfony-bundle`.
 
+## v0.2.2
+
+### Changed
+
+- The `url` option is optional: left empty it resolves to the hosted service.
+  The bundle's own source did not change; it builds the core `Config`, and the
+  core now fills an absent address. Set `url` only to reach a self-hosted
+  instance. Requires `quiet-guard/monitor-php` `^0.2.2`.
+
 ## v0.2.1
 
 ### Fixed

@@ -35,7 +35,7 @@ return [
 # config/packages/monitor.yaml
 monitor:
     enabled: true
-    url: '%env(MONITOR_URL)%'
+    url: '%env(default::MONITOR_URL)%'   # empty = the hosted service, https://quietguard.dev
     key: '%env(MONITOR_KEY)%'
     timeout: 3                  # HTTP timeout in seconds
     release: '%env(default::MONITOR_RELEASE)%'   # e.g. a git SHA
