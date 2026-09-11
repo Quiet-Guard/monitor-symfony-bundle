@@ -2,6 +2,14 @@
 
 All notable changes to `quiet-guard/monitor-symfony-bundle`.
 
+## Unreleased
+
+### Added
+
+- The `code_snippets` option (default `true`): application frames carry a
+  few lines of source around their line; `false` sends file and line only.
+  Requires `quiet-guard/monitor-php` with `SourceSnippet`.
+
 ## v0.2.2
 
 ### Changed

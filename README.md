@@ -40,6 +40,7 @@ monitor:
     timeout: 3                  # HTTP timeout in seconds
     release: '%env(default::MONITOR_RELEASE)%'   # e.g. a git SHA
     trace_limit: 0              # 0 = full trace (default); a positive value trims
+    code_snippets: true         # source lines around application frames; false sends file and line only
     environments: ['prod']      # empty = report from all environments
     scrub: ['password', 'passphrase', 'token', 'secret', 'authorization', 'cookie', 'referer', 'referrer', 'api_key']
     logs:

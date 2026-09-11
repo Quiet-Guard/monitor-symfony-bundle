@@ -21,6 +21,9 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('release')->defaultNull()->end()
             // 0 = unlimited: the full trace ships by default, like the sibling SDKs.
             ->integerNode('trace_limit')->defaultValue(0)->end()
+            // A few lines of the application's own source around each frame;
+            // dependencies never send theirs. False sends file and line only.
+            ->booleanNode('code_snippets')->defaultTrue()->end()
             ->arrayNode('environments')
             ->scalarPrototype()->end()
             ->defaultValue([])

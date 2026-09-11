@@ -47,6 +47,7 @@ class MonitorExtension extends Extension
             $config['trace_limit'],
             $config['redact'],
             $config['redact_custom'],
+            $config['code_snippets'],
         ]));
 
         $container->setDefinition('monitor.http_client', new Definition(CurlHttpClient::class));
@@ -54,6 +55,7 @@ class MonitorExtension extends Extension
         $container->setDefinition('monitor.payload_builder', new Definition(ExceptionPayloadBuilder::class, [
             $config['trace_limit'],
             $config['release'],
+            $config['code_snippets'],
         ]));
 
         // Le logger, cinquième argument, qui n'était pas passé : c'est la SEULE
