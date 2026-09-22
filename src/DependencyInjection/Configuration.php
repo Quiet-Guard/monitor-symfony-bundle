@@ -30,7 +30,7 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->arrayNode('scrub')
             ->scalarPrototype()->end()
-            ->defaultValue(['password', 'passphrase', 'token', 'secret', 'authorization', 'cookie', 'referer', 'referrer', 'api_key'])
+            ->defaultValue(['password', 'password_confirmation', 'passphrase', 'token', 'signature', 'secret', 'authorization', 'cookie', 'referer', 'referrer', 'api_key'])
             ->end()
             // Le masquage par FORME était actif par défaut (Config le veut
             // ainsi, article 25.2), déclaré nulle part dans cet arbre et
