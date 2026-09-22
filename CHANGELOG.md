@@ -18,8 +18,9 @@ All notable changes to `quiet-guard/monitor-symfony-bundle`.
 
 ### Changed
 
-- The message of a forwarded log goes through the scrubber too: a message that
-  starts with a URL, or that is JSON, is masked like a context value.
+- The message of a forwarded log goes through the scrubber too: when it starts
+  with a URL or is JSON, the values it carries are masked like a context
+  value's, and the rest of its text is kept.
 
 ## v0.3.0
 
