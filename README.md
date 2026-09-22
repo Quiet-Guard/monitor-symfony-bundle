@@ -42,7 +42,7 @@ monitor:
     trace_limit: 0              # 0 = full trace (default); a positive value trims
     code_snippets: true         # source lines around application frames; false sends file and line only
     environments: ['prod']      # empty = report from all environments
-    scrub: ['password', 'passphrase', 'token', 'secret', 'authorization', 'cookie', 'referer', 'referrer', 'api_key']
+    scrub: ['password', 'password_confirmation', 'passphrase', 'token', 'signature', 'secret', 'authorization', 'cookie', 'referer', 'referrer', 'api_key']
     logs:
         enabled: false          # opt-in log forwarding
         level: warning          # minimum Monolog level to forward
