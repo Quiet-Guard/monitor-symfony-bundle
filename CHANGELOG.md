@@ -2,6 +2,25 @@
 
 All notable changes to `quiet-guard/monitor-symfony-bundle`.
 
+## v0.3.1
+
+### Security
+
+- The reported URL is masked. `request.url`, built from `Request::getUri()`,
+  travelled whole, with a reset link's token in its query or its path. The
+  query values the `scrub` list names become `%5Bscrubbed%5D` now, and so does
+  every path segment made of forty letters or digits in a row.
+- A key spelled with hyphens is masked like its underscore spelling
+  (`x-api-key` under `api_key`), and a JSON object or array written as a
+  string is opened and masked by key instead of travelling as it came.
+- `signature` joins the default `scrub` list, as in the Laravel SDK, and so
+  does `password_confirmation`, which `password` already covered.
+
+### Changed
+
+- The message of a forwarded log goes through the scrubber too: a message that
+  starts with a URL, or that is JSON, is masked like a context value.
+
 ## v0.3.0
 
 ### Added
