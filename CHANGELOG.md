@@ -10,6 +10,11 @@ All notable changes to `quiet-guard/monitor-symfony-bundle`.
   travelled whole, with a reset link's token in its query or its path. The
   query values the `scrub` list names become `%5Bscrubbed%5D` now, and so does
   every path segment made of forty letters or digits in a row.
+- The `hash` of a login link and the `_hash` of a URL signed by the
+  `UriSigner` are masked in the reported URL whatever the `scrub` list holds,
+  with Azure's `sig` and `signature`: a login link works for whoever has it
+  until it expires. The names are matched exactly and in an address only, so
+  a `content_hash` parameter, a `hash` key and a line calling `hash()` stay.
 - A key spelled with hyphens is masked like its underscore spelling
   (`x-api-key` under `api_key`), and a JSON object or array written as a
   string is opened and masked by key instead of travelling as it came.
