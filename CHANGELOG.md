@@ -23,6 +23,9 @@ All notable changes to `quiet-guard/monitor-symfony-bundle`.
 
 ### Changed
 
+- The core is required as `^0.3.1`: the masking this release documents
+  (hyphenated header names, JSON strings, URLs, signed-URL parameters) lives
+  in that core, so it must never resolve with an older one.
 - The message of a forwarded log goes through the scrubber too: when it starts
   with a URL or is JSON, the values it carries are masked like a context
   value's, and the rest of its text is kept.
