@@ -2,6 +2,14 @@
 
 All notable changes to `quiet-guard/monitor-symfony-bundle`.
 
+## v0.4.0
+
+### Changed
+
+- The core is required as `^0.4.0`. Nothing else changes in the bundle: this
+  release follows the Laravel SDK's automatic heartbeats, which the bundle
+  does not ship, and the core carries no change of its own.
+
 ## v0.3.1
 
 ### Security
