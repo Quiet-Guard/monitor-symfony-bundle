@@ -47,7 +47,7 @@ monitor:
         enabled: false          # opt-in log forwarding
         level: warning          # minimum Monolog level to forward
         max_batch: 200          # flush past this many records, held to the server's 500
-    redact: [email, iban, nir, card, phone]   # value shapes masked before sending; [] disables
+    # redact: absent = every shape the core knows (personal data and credentials); a list writes it out, [] disables
     redact_custom:
         order: '/ORD-\d+/'                    # label => pattern, masked as [redacted:order]
 ```
@@ -58,9 +58,15 @@ monitor:
 `config/packages/dev/monitor.yaml` compiles even when a `monolog.yaml`
 references `monitor.log_handler`.
 
-Value masking by shape (`email`, `iban`, `nir`, `card`, `phone`) is on by
-default and is configured by the `redact` and `redact_custom` keys of the same
-tree; an empty `redact` list turns it off.
+Value masking by shape is on by default with every shape the core knows:
+personal data (`email`, `iban`, `nir`, `card`, `phone`) and, from version
+0.6.0, credentials recognised by their prefix (Stripe, AWS, GitHub, GitLab and
+Slack keys, JWTs, private key blocks, a Laravel `APP_KEY`, a Quiet Guard
+project key) plus the password of a `user:password@host` written into an
+address. It is configured by the `redact` and `redact_custom` keys of the same
+tree; a `redact` list written out replaces the default, and an empty one turns
+it off. A field the engine could not read is withheld as
+`[redacted:unscannable]` rather than sent as it came.
 
 ## What it wires
 
