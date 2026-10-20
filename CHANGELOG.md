@@ -14,6 +14,9 @@ All notable changes to `quiet-guard/monitor-symfony-bundle`.
   is read as the default it was and masks credentials too. The bundle sends the request method and
   URL only, so the header allow list of the Laravel SDK has no counterpart
   here.
+- The shapes `getUri()` writes percent-encoded in the reported URL (an email
+  as `%40`, a number written with spaces as `%20`) are masked, through the
+  core's `ValueRedactor`, which now reads an encoded value decoded.
 
 ### Changed
 
