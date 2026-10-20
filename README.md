@@ -78,7 +78,7 @@ one turns it off. A field the engine could not read is withheld as
   (-64) and reports unhandled throwables with the request method and URL.
   Additive: it never alters the response or stops propagation. Expected HTTP
   errors (`HttpExceptionInterface` with a status below 500, such as 404 bot
-  probes) are skipped so they never burn your event quota; 5xx HTTP exceptions
+  probes) are skipped so they never burn your exception quota; 5xx HTTP exceptions
   are reported.
 - `monitor.log_handler`: a Monolog handler that buffers records and ships them
   in batches, on `max_batch` or when the handler closes. Records carrying an
