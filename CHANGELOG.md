@@ -2,7 +2,7 @@
 
 All notable changes to `quiet-guard/monitor-symfony-bundle`.
 
-## v0.6.0 (unreleased)
+## v0.6.0
 
 ### Security
 
