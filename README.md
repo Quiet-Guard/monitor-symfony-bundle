@@ -60,12 +60,14 @@ references `monitor.log_handler`.
 
 Value masking by shape is on by default with every shape the core knows:
 personal data (`email`, `iban`, `nir`, `card`, `phone`) and, from version
-0.6.0, credentials recognised by their prefix (Stripe, AWS, GitHub, GitLab and
-Slack keys, JWTs, private key blocks, a Laravel `APP_KEY`, a Quiet Guard
-project key) plus the password of a `user:password@host` written into an
-address. It is configured by the `redact` and `redact_custom` keys of the same
-tree; a `redact` list written out replaces the default, and an empty one turns
-it off. A field the engine could not read is withheld as
+0.6.0, credentials recognised by their prefix (Stripe keys, an AWS access key id and
+its secret key when it follows one, GitHub, GitLab and Slack tokens, JWTs,
+private key blocks, a Laravel `APP_KEY`, a Quiet Guard project key) plus the
+password of a `user:password@host` written into an address. It is configured
+by the `redact` and `redact_custom` keys of the same tree; a `redact` list
+written out replaces the default (except the exact pre-0.6.0 list
+`[email, iban, nir, card, phone]`, read as the default it was), and an empty
+one turns it off. A field the engine could not read is withheld as
 `[redacted:unscannable]` rather than sent as it came.
 
 ## What it wires

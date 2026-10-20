@@ -9,9 +9,9 @@ All notable changes to `quiet-guard/monitor-symfony-bundle`.
 - Credentials are masked by their shape wherever they sit, through the core's
   `ValueRedactor` the bundle already runs: see the core's changelog for the
   shapes. The `redact` default is `ValueRedactor::PATTERNS` and follows the
-  core; a `redact` list written out in `monitor.yaml` before this version
-  (the five personal shapes) replaces that default and masks no credential
-  until it is completed or removed. The bundle sends the request method and
+  core; a `redact` list written out in `monitor.yaml` replaces that default,
+  except the exact pre-0.6.0 list (`[email, iban, nir, card, phone]`), which
+  is read as the default it was and masks credentials too. The bundle sends the request method and
   URL only, so the header allow list of the Laravel SDK has no counterpart
   here.
 
