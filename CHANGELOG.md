@@ -2,6 +2,14 @@
 
 All notable changes to `quiet-guard/monitor-symfony-bundle`.
 
+## Unreleased
+
+### Security
+
+- An object in a log record context (a DTO with a public `password`
+  property) is masked like an array: the core now turns it into data before
+  masking, where it used to be expanded by `json_encode` after it.
+
 ## v0.7.0
 
 No change of its own: released with the family, and requires the core
