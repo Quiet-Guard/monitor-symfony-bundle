@@ -2,6 +2,10 @@
 
 All notable changes to `quiet-guard/monitor-symfony-bundle`.
 
+## v0.8.0 (unreleased)
+
+No change of its own: released with the family. The core now masks presigned storage addresses.
+
 ## v0.7.1
 
 ### Security
