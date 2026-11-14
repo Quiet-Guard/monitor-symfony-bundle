@@ -2,6 +2,10 @@
 
 All notable changes to `quiet-guard/monitor-symfony-bundle`.
 
+## v0.10.0
+
+No change of its own: released with the family. Requires the core as `^0.10.0`.
+
 ## v0.9.0
 
 No change of its own: released with the family. Requires the core as `^0.9.0`.
